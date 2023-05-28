@@ -33,10 +33,23 @@ struct ShortcakeView: View {
                     // Video player
                     VideoPlayer(player: avPlayer)
                     
-                    Button {
-                        //
-                    } label: {
-                        Image(systemName: "camera")
+                    // Tools
+                    VStack {
+                        // Screenshot button
+                        Button {
+                            //
+                        } label: {
+                            Image(systemName: "camera")
+                        }
+                        .buttonStyle(CircleButtonStyle())
+                        
+                        // open new video button
+                        Button {
+                            isPresented.toggle()
+                        } label: {
+                            Image(systemName: "plus")
+                        }
+                        .buttonStyle(CircleButtonStyle())
                     }
                     .padding()
                 }
