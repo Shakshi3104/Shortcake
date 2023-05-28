@@ -30,11 +30,32 @@ class ScreenshotGenerator: ObservableObject {
             imageGenerator.requestedTimeToleranceAfter = CMTime.zero
             imageGenerator.requestedTimeToleranceBefore = CMTime.zero
             
-            print("🍰 Take a screenshot!")
+            
             
             if let (image, actualTime) = try? await imageGenerator.image(at: player.currentTime()) {
+                print("🍰 Take a screenshot!")
                 DispatchQueue.main.async {
                     self.screenshot = image
+                }
+                
+                // Generate filename
+                let videoName = url.deletingPathExtension().lastPathComponent
+                let seconds = String(format: "%.3f", actualTime.seconds)
+                print("🍰 \(videoName) \(seconds)")
+                let filename = "\(videoName)-\(seconds)"
+                
+                guard let downloadDir = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first else { return }
+                let fileURL = downloadDir.appendingPathComponent(filename, conformingTo: .png)
+                print("🍰 \(fileURL)")
+                
+                // Save png image
+                let rep = NSBitmapImageRep(cgImage: image)
+                if let data = rep.representation(using: .png, properties: [:]) {
+                    do {
+                        try data.write(to: fileURL)
+                    } catch {
+                        print("🍰 \(error.localizedDescription)")
+                    }
                 }
             }
         }
