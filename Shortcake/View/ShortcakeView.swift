@@ -25,10 +25,11 @@ struct ShortcakeView: View {
     @StateObject var screenshotGenerator = ScreenshotGenerator()
     
     @State private var isPresented = false
+    @State private var triggers: Bool?
     
     var body: some View {
         VStack {
-            if let avPlayer = screenshotGenerator.avPlayer {
+            if let avPlayer = screenshotGenerator.player {                
                 ZStack(alignment: .topTrailing) {
                     // Video player
                     VideoPlayer(player: avPlayer)
@@ -37,7 +38,11 @@ struct ShortcakeView: View {
                     VStack {
                         // Screenshot button
                         Button {
-                            //
+                            if triggers == nil {
+                                triggers = true
+                            } else {
+                                triggers?.toggle()
+                            }
                         } label: {
                             Image(systemName: "camera")
                         }
@@ -65,11 +70,16 @@ struct ShortcakeView: View {
             switch result {
             case .success(let url):
                 let avPlayer = AVPlayer(url: url)
-                screenshotGenerator.avPlayer = avPlayer
+                screenshotGenerator.player = avPlayer
                 
             case .failure(let failure):
                 print("🍰 \(failure.localizedDescription)")
             }
+        }
+        .task(id: triggers) {
+            // https://zenn.dev/treastrain/articles/3effccd39f4056
+            guard triggers != nil else { return }
+            await screenshotGenerator.shot()
         }
     }
 }

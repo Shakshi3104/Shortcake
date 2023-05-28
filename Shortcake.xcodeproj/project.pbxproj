@@ -13,6 +13,7 @@
 		CEB0BF6C2A221C420038D0B8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEB0BF6B2A221C420038D0B8 /* Preview Assets.xcassets */; };
 		CEB0BF742A221C840038D0B8 /* ShortcakeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0BF732A221C840038D0B8 /* ShortcakeView.swift */; };
 		CEB0BF792A2339210038D0B8 /* ScreenshotGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0BF782A2339210038D0B8 /* ScreenshotGenerator.swift */; };
+		CEB0BF7B2A2342880038D0B8 /* CGImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0BF7A2A2342880038D0B8 /* CGImage+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		CEB0BF6D2A221C420038D0B8 /* Shortcake.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Shortcake.entitlements; sourceTree = "<group>"; };
 		CEB0BF732A221C840038D0B8 /* ShortcakeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcakeView.swift; sourceTree = "<group>"; };
 		CEB0BF782A2339210038D0B8 /* ScreenshotGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotGenerator.swift; sourceTree = "<group>"; };
+		CEB0BF7A2A2342880038D0B8 /* CGImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGImage+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				CEB0BF782A2339210038D0B8 /* ScreenshotGenerator.swift */,
+				CEB0BF7A2A2342880038D0B8 /* CGImage+Extension.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -165,6 +168,7 @@
 				CEB0BF792A2339210038D0B8 /* ScreenshotGenerator.swift in Sources */,
 				CEB0BF672A221C410038D0B8 /* ContentView.swift in Sources */,
 				CEB0BF652A221C410038D0B8 /* ShortcakeApp.swift in Sources */,
+				CEB0BF7B2A2342880038D0B8 /* CGImage+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
