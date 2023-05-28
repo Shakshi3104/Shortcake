@@ -30,6 +30,8 @@ class ScreenshotGenerator: ObservableObject {
             imageGenerator.requestedTimeToleranceAfter = CMTime.zero
             imageGenerator.requestedTimeToleranceBefore = CMTime.zero
             
+            print("🍰 Take a screenshot!")
+            
             if let (image, actualTime) = try? await imageGenerator.image(at: player.currentTime()) {
                 DispatchQueue.main.async {
                     self.screenshot = image

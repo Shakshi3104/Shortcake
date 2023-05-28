@@ -24,40 +24,66 @@ struct CircleButtonStyle: ButtonStyle {
 struct ShortcakeView: View {
     @StateObject var screenshotGenerator = ScreenshotGenerator()
     
+    /// show file importer
     @State private var isPresented = false
+    /// take a screenshot
     @State private var triggers: Bool?
+    /// show a screenshot
+    @State private var isShowScreenshot = false
+    
     
     var body: some View {
         VStack {
-            if let avPlayer = screenshotGenerator.player {                
-                ZStack(alignment: .topTrailing) {
-                    // Video player
-                    VideoPlayer(player: avPlayer)
-                    
-                    // Tools
-                    VStack {
-                        // Screenshot button
-                        Button {
-                            if triggers == nil {
-                                triggers = true
-                            } else {
-                                triggers?.toggle()
-                            }
-                        } label: {
-                            Image(systemName: "camera")
-                        }
-                        .buttonStyle(CircleButtonStyle())
+            if let avPlayer = screenshotGenerator.player {
+                ZStack(alignment: .bottomTrailing) {
+                    ZStack(alignment: .topTrailing) {
+                        // Video player
+                        VideoPlayer(player: avPlayer)
                         
-                        // open new video button
-                        Button {
-                            isPresented.toggle()
-                        } label: {
-                            Image(systemName: "plus")
+                        // Tools
+                        VStack {
+                            // Screenshot button
+                            Button {
+                                if triggers == nil {
+                                    triggers = true
+                                } else {
+                                    triggers?.toggle()
+                                }
+                            } label: {
+                                Image(systemName: "camera")
+                            }
+                            .buttonStyle(CircleButtonStyle())
+                            
+                            // open new video button
+                            Button {
+                                isPresented.toggle()
+                            } label: {
+                                Image(systemName: "plus")
+                            }
+                            .buttonStyle(CircleButtonStyle())
                         }
-                        .buttonStyle(CircleButtonStyle())
+                        .padding()
                     }
-                    .padding()
+                    
+                    // Taken screenshot
+                    if let cgImage = screenshotGenerator.screenshot {
+                        if isShowScreenshot {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 5)
+                                    .frame(width: 170, height: 100)
+                                    .foregroundColor(.black.opacity(0.7))
+                                
+                                Image(nsImage: cgImage.toNSImage)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 160, height: 90)
+                            }
+                            .padding(5)
+                            .transition(.asymmetric(insertion: .identity, removal: .slide).combined(with: .opacity))
+                        }
+                    }
                 }
+                
             } else {
                 Button {
                     isPresented.toggle()
@@ -80,6 +106,17 @@ struct ShortcakeView: View {
             // https://zenn.dev/treastrain/articles/3effccd39f4056
             guard triggers != nil else { return }
             await screenshotGenerator.shot()
+            
+            // animation
+            withAnimation {
+                isShowScreenshot = true
+            }
+            
+            try! await Task.sleep(nanoseconds: 2 * 1000 * 1000 * 1000)
+            
+            withAnimation {
+                isShowScreenshot = false
+            }
         }
     }
 }
