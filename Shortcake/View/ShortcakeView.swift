@@ -22,13 +22,15 @@ struct CircleButtonStyle: ButtonStyle {
 
 // MARK: - ShortcakeView
 struct ShortcakeView: View {
+    @StateObject var screenshotGenerator = ScreenshotGenerator()
+    
     @State private var isPresented = false
-    @State private var avPlayer: AVPlayer?
     
     var body: some View {
         VStack {
-            if let avPlayer {
+            if let avPlayer = screenshotGenerator.avPlayer {
                 ZStack(alignment: .topTrailing) {
+                    // Video player
                     VideoPlayer(player: avPlayer)
                     
                     Button {
@@ -36,9 +38,7 @@ struct ShortcakeView: View {
                     } label: {
                         Image(systemName: "camera")
                     }
-                    .buttonStyle(CircleButtonStyle())
                     .padding()
-
                 }
             } else {
                 Button {
@@ -51,7 +51,8 @@ struct ShortcakeView: View {
         .fileImporter(isPresented: $isPresented, allowedContentTypes: [.movie, .quickTimeMovie, .mpeg4Movie]) { result in
             switch result {
             case .success(let url):
-                avPlayer = AVPlayer(url: url)
+                let avPlayer = AVPlayer(url: url)
+                screenshotGenerator.avPlayer = avPlayer
                 
             case .failure(let failure):
                 print("🍰 \(failure.localizedDescription)")
