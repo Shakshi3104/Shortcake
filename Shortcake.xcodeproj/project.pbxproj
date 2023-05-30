@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE3B8A1D2A26125D0099FB72 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3B8A1C2A26125D0099FB72 /* AVKit.framework */; };
 		CEB0BF652A221C410038D0B8 /* ShortcakeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0BF642A221C410038D0B8 /* ShortcakeApp.swift */; };
 		CEB0BF672A221C410038D0B8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0BF662A221C410038D0B8 /* ContentView.swift */; };
 		CEB0BF692A221C420038D0B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEB0BF682A221C420038D0B8 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE3B8A1C2A26125D0099FB72 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		CE6BD4792A2365E4000757D8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CE6BD47B2A23662E000757D8 /* shortcake-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shortcake-icon.png"; sourceTree = "<group>"; };
 		CE6BD47C2A236A02000757D8 /* shortcake.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = shortcake.gif; sourceTree = "<group>"; };
@@ -36,12 +38,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE3B8A1D2A26125D0099FB72 /* AVKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE3B8A1B2A26125D0099FB72 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CE3B8A1C2A26125D0099FB72 /* AVKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CE6BD47A2A2365EA000757D8 /* materials */ = {
 			isa = PBXGroup;
 			children = (
@@ -58,6 +69,7 @@
 				CE6BD4792A2365E4000757D8 /* README.md */,
 				CEB0BF632A221C410038D0B8 /* Shortcake */,
 				CEB0BF622A221C410038D0B8 /* Products */,
+				CE3B8A1B2A26125D0099FB72 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -317,6 +329,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "Use to capture screenshots";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -346,6 +359,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "Use to capture screenshots";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
