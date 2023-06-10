@@ -53,6 +53,7 @@ struct ShortcakeView: View {
                                 Image(systemName: "camera")
                             }
                             .buttonStyle(CircleButtonStyle())
+                            .keyboardShortcut("0", modifiers: [.command, .shift])
                             
                             // open new video button
                             Button {
@@ -61,6 +62,7 @@ struct ShortcakeView: View {
                                 Image(systemName: "plus")
                             }
                             .buttonStyle(CircleButtonStyle())
+                            .keyboardShortcut("n", modifiers: [.command])
                         }
                         .padding()
                     }
