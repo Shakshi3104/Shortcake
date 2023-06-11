@@ -114,7 +114,7 @@ struct ShortcakeView: View {
                 isShowScreenshot = true
             }
             
-            try! await Task.sleep(nanoseconds: 2 * 1000 * 1000 * 1000)
+            try! await Task.sleep(nanoseconds: 1 * 1000 * 1000 * 1000)
             
             withAnimation {
                 isShowScreenshot = false
