@@ -107,6 +107,7 @@ struct ShortcakeView: View {
                         } label: {
                             Text("Open")
                         }
+                        .keyboardShortcut("n", modifiers: [.command])
                     }
                 }
                 .padding()
