@@ -30,6 +30,8 @@ struct ShortcakeView: View {
     @State private var triggers: Bool?
     /// show a screenshot
     @State private var isShowScreenshot = false
+    /// drop target
+    @State private var isDropTargeted = false
     
     
     var body: some View {
@@ -87,11 +89,28 @@ struct ShortcakeView: View {
                 }
                 
             } else {
-                Button {
-                    isPresented.toggle()
-                } label: {
-                    Text("Open")
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(
+                            Color.primary,
+                            style: StrokeStyle(
+                                lineWidth: 0.8,
+                                dash: [2, 2, 2, 2]
+                            )
+                        )
+                    
+                    VStack {
+                        Text("Drop")
+                        Text("or")
+                        Button {
+                            isPresented.toggle()
+                        } label: {
+                            Text("Open")
+                        }
+                        .keyboardShortcut("n", modifiers: [.command])
+                    }
                 }
+                .padding()
             }
         }
         .fileImporter(isPresented: $isPresented, allowedContentTypes: [.movie, .quickTimeMovie, .mpeg4Movie]) { result in
@@ -103,6 +122,22 @@ struct ShortcakeView: View {
             case .failure(let failure):
                 print("🍰 \(failure.localizedDescription)")
             }
+        }
+        .onDrop(of: [ .fileURL], isTargeted: $isDropTargeted) { providers in
+            guard let provider = providers.first else { return false }
+            
+            if provider.canLoadObject(ofClass: URL.self) {
+                provider.loadObject(ofClass: URL.self) { object, error in
+                    if let url = object {
+                        let avPlayer = AVPlayer(url: url)
+                        DispatchQueue.main.async {
+                            screenshotGenerator.player = avPlayer
+                        }
+                    }
+                }
+            }
+            
+            return true
         }
         .task(id: triggers) {
             // https://zenn.dev/treastrain/articles/3effccd39f4056
