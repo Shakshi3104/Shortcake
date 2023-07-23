@@ -19,9 +19,9 @@
 
 /* Begin PBXFileReference section */
 		CE3B8A1C2A26125D0099FB72 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		CE6748D12A6D348500176CDC /* shortcake.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = shortcake.gif; sourceTree = "<group>"; };
 		CE6BD4792A2365E4000757D8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CE6BD47B2A23662E000757D8 /* shortcake-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shortcake-icon.png"; sourceTree = "<group>"; };
-		CE6BD47C2A236A02000757D8 /* shortcake.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = shortcake.gif; sourceTree = "<group>"; };
 		CEB0BF612A221C410038D0B8 /* Shortcake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shortcake.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEB0BF642A221C410038D0B8 /* ShortcakeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcakeApp.swift; sourceTree = "<group>"; };
 		CEB0BF662A221C410038D0B8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -56,8 +56,8 @@
 		CE6BD47A2A2365EA000757D8 /* materials */ = {
 			isa = PBXGroup;
 			children = (
-				CE6BD47C2A236A02000757D8 /* shortcake.gif */,
 				CE6BD47B2A23662E000757D8 /* shortcake-icon.png */,
+				CE6748D12A6D348500176CDC /* shortcake.gif */,
 			);
 			path = materials;
 			sourceTree = "<group>";
