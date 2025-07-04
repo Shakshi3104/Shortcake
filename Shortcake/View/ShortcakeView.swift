@@ -26,12 +26,12 @@ struct ShortcakeView: View {
     
     /// show file importer
     @State private var isPresented = false
-    /// take a screenshot
-    @State private var triggers: Bool?
     /// show a screenshot
     @State private var isShowScreenshot = false
     /// drop target
     @State private var isDropTargeted = false
+    /// processing screenshot
+    @State private var isProcessing = false
     
     
     var body: some View {
@@ -46,14 +46,26 @@ struct ShortcakeView: View {
                         VStack {
                             // Screenshot button
                             Button {
-                                if triggers == nil {
-                                    triggers = true
-                                } else {
-                                    triggers?.toggle()
+                                Task {
+                                    isProcessing = true
+                                    await screenshotGenerator.shot()
+                                    
+                                    // animation
+                                    withAnimation {
+                                        isShowScreenshot = true
+                                    }
+                                    
+                                    try? await Task.sleep(nanoseconds: 1 * 1000 * 1000 * 1000)
+                                    
+                                    withAnimation {
+                                        isShowScreenshot = false
+                                    }
+                                    isProcessing = false
                                 }
                             } label: {
                                 Image(systemName: "camera")
                             }
+                            .disabled(isProcessing)
                             .buttonStyle(CircleButtonStyle())
                             .keyboardShortcut("0", modifiers: [.command, .shift])
                             
@@ -127,7 +139,7 @@ struct ShortcakeView: View {
             guard let provider = providers.first else { return false }
             
             if provider.canLoadObject(ofClass: URL.self) {
-                provider.loadObject(ofClass: URL.self) { object, error in
+                _ = provider.loadObject(ofClass: URL.self) { object, error in
                     if let url = object {
                         let avPlayer = AVPlayer(url: url)
                         DispatchQueue.main.async {
@@ -139,22 +151,7 @@ struct ShortcakeView: View {
             
             return true
         }
-        .task(id: triggers) {
-            // https://zenn.dev/treastrain/articles/3effccd39f4056
-            guard triggers != nil else { return }
-            await screenshotGenerator.shot()
-            
-            // animation
-            withAnimation {
-                isShowScreenshot = true
-            }
-            
-            try! await Task.sleep(nanoseconds: 1 * 1000 * 1000 * 1000)
-            
-            withAnimation {
-                isShowScreenshot = false
-            }
-        }
+        
     }
 }
 
