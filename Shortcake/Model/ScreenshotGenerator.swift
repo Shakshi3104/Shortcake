@@ -10,6 +10,7 @@ import AVKit
 
 
 // MARK: ScreenshotGenerator
+@MainActor
 class ScreenshotGenerator: ObservableObject {
     @Published var player: AVPlayer?
     @Published var screenshot: CGImage?
@@ -34,9 +35,7 @@ class ScreenshotGenerator: ObservableObject {
             
             if let (image, actualTime) = try? await imageGenerator.image(at: player.currentTime()) {
                 print("🍰 Take a screenshot!")
-                DispatchQueue.main.async {
-                    self.screenshot = image
-                }
+                self.screenshot = image
                 
                 // Generate filename
                 let videoName = url.deletingPathExtension().lastPathComponent
